@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 50px;
+            overflow: hidden;
+            background-color: pink;
+            color: white;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        p {
+            font-size: 1.5em;
+        }
+        .heart-button {
+            background-color: red;
+            color: white;
+            font-size: 1.5em;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .heart-button:hover {
+            background-color: hotpink;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+        #noBtn {
+            padding: 20px 40px;
+            background-color: red;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+            position: absolute;
+        }
+        #noBtn:hover {
+            background-color: hotpink;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+        .hidden {
+            display: none;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+        .gif-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .gif-container img {
+            width: 240px;
+            height: 240px;
+            margin: 0 20px;
+        }
+        .gif-left {
+            margin-right: auto;
+        }
+        .gif-right {
+            margin-left: auto;
+        }
+        .video-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        video {
+            width: 100%;  /* Asegura que el video ocupe el 100% del ancho del contenedor */
+            max-width: 300px;  /* Limita el tamaño máximo del video */
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .additional-gifs {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            flex-wrap: wrap;  /* Asegura que los GIFs se ajusten en pantallas más pequeñas */
+            justify-content: center;
+        }
+        .additional-gifs img {
+            width: 150px;
+            height: 150px;
+            margin: 0 15px;
+        }
+        /* Responsividad para dispositivos más pequeños */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+            .heart-button {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+            #noBtn {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+            .gif-container img {
+                width: 150px;
+                height: 150px;
+            }
+            .video-container video {
+                width: 80%;  /* El video se ajusta mejor en pantallas más pequeñas */
+                max-width: 250px;  /* Tamaño más pequeño en pantallas móviles */
+            }
+            .additional-gifs img {
+                width: 120px;  /* Reducción de tamaño de los GIFs */
+                height: 120px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .heart-button {
+                font-size: 1.1em;
+                padding: 10px 25px;
+            }
+            #noBtn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+            }
+            .gif-container img {
+                width: 120px;
+                height: 120px;
+            }
+            .video-container video {
+                width: 90%;  /* El video ocupa casi todo el ancho en pantallas más pequeñas */
+                max-width: 220px;
+            }
+            .additional-gifs img {
+                width: 100px;  /* Ajuste más pequeño para GIFs en móviles */
+                height: 100px;
+            }
+        }
+    </style>
+    <script>
+        function goToQuestion() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        }
+        
+        function moveNoButton() {
+            let btn = document.getElementById("noBtn");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            btn.style.left = `${x}px`;
+            btn.style.top = `${y}px`;
+        }
+        
+        function acceptValentine() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+            // Reproducir el video después de presionar el botón
+            document.getElementById('valentineVideo').play();
+        }
+        
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = Math.random() * window.innerHeight + "px";
+                heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                document.body.appendChild(heart);
+            }
+        }
+        
+        window.onload = createHearts;
+    </script>
+</head>
+<body>
+    <div id="page1">
+        <h1>Hoy es San Valentín ❤️</h1>
+        <p>¿Te gustaría responder una pregunta especial?</p>
+        <div class="gif-container">
+            <img src="gif1.gif" alt="Gif 1" class="gif-left">
+            <img src="gif2.gif" alt="Gif 2" class="gif-right">
+        </div>
+        <button class="heart-button" onclick="goToQuestion()">💖 Claro 💖</button>
+    </div>
+    
+    <div id="page2" class="hidden">
+        <h1>¿Quieres ser mi San Valentín? 💕</h1>
+        <img src="gif3.gif" alt="Gif 3" width="425" height="342">
+        <br>
+        <button class="heart-button" onclick="acceptValentine()">💘 Sí 💘</button>
+        <button id="noBtn" onmouseover="moveNoButton()">No 😢</button>
+    </div>
+    
+    <div id="page3" class="hidden">
+        <h1>¡Sabía que aceptarías! 💖</h1>
+        <p>Feliz San Valentín, te quiero mucho! 😘</p>
+        <div class="video-container">
+            <video id="valentineVideo" autoplay loop>
+                <source src="corazon.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+        <div class="additional-gifs">
+            <img src="gif4.gif" alt="Gif 4">
+            <img src="gif5.gif" alt="Gif 5">
+        </div>
+    </div>
+</body>
+</html>
