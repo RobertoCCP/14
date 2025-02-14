@@ -1,0 +1,7 @@
+services:
+  - type: static_site
+    name: san-valentin
+    repo: https://github.com/RobertoCCP/14
+    branch: main
+    buildCommand: ''
+    publishDirectory: './'  # El directorio que contiene tus archivos HTML directamente
